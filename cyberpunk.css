@@ -1,0 +1,127 @@
+body {
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(18, 64, 88), rgba(254, 17, 254), rgba(122, 4, 235));
+    position: relative;
+    margin: 100px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+}
+
+#title {
+    font-family: courier ;
+    font-size:60px;
+    font-weight: bold;
+    color: #ff124f;
+    text-shadow: 0px 0px 10px #ff00a0;
+    margin-bottom: 100px;
+    text-align: center;
+    width: auto;
+
+}
+
+span{
+    margin: auto;
+}
+
+
+a {
+    font-family: courier ;
+    font-size: 45px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #ff124f; /*#fe75fe;*/
+    outline: #ff124f solid;
+    /*border-style: groove;*/
+    padding: 30px;
+    margin: auto;
+    background-color: #000106;
+}
+a:hover {
+    box-shadow: 0px 0px 20px white;
+    
+}
+
+#start{
+    margin: auto;
+    width: 25%;
+    
+}
+
+/*#B {
+    position: relative;
+    animation-name: titleLeft;
+    animation-duration: 5s;  
+}
+#o {
+    position: relative;
+    animation-name: titleLeft;
+    animation-duration: 10s;
+
+}
+#m {
+    position: relative;
+    animation-name: titleLeft;
+    animation-duration: 15s;
+}
+#b {
+    position: relative;
+    animation-name: titleLeft;
+    animation-duration: 20s;
+}
+
+#s {
+    position: relative;
+    animation-name: titleRight;
+    animation-duration: 5s;  
+}
+#q {
+    position: relative;
+    animation-name: titleRight;
+    animation-duration: 10s;
+
+}
+#u {
+    position: relative;
+    animation-name: titleRight;
+    animation-duration: 17s;
+}
+#a {
+    position: relative;
+    animation-name: titleRight;
+    animation-duration: 24s;
+}
+#d {
+    position: relative;
+    animation-name: titleRight;
+    animation-duration: 30s;
+}
+*/
+/*
+#start{
+    animation-name: startButton;
+    animation-duration: 5s;
+    animation-timing-function: ease-out;
+    animation-play-state: running;
+}
+
+
+@keyframes titleLeft {
+  from {left: 1000px;}
+  to {left: 0px;}
+}
+
+@keyframes titleRight {
+  from {right: 1500px;}
+  to {right: 0px;}
+}
+
+ @keyframes startButton {
+        0% {
+            transform: scale(0, 0);
+            from {top: 0px};
+        }
+        100% {
+            transform: scale(1,1);
+        }
+    }*/
