@@ -52,6 +52,8 @@ function pictureGen(chosenX) {
         newGame.type = "button";
         newGame.innerHTML = "New Game";
 
+
+
 /* ---main function--- */
 //everything here happens after user input
 function genTable() {
@@ -131,31 +133,37 @@ function genTable() {
 
 /* ---table element creator and containers--- */
     
-    var columnLeft = document.createElement("div");
+    /*var columnLeft = document.createElement("div");
     columnLeft.className = "column side";
-    document.body.appendChild(columnLeft);
+    document.body.appendChild(columnLeft);*/
 
-    var columnMid = document.createElement("div");
+   /*var columnMid = document.createElement("div");
     columnMid.className = "column middle";
-    document.body.appendChild(columnMid);
+    document.body.appendChild(columnMid);*/
 
     var table = document.createElement("TABLE");
     table.setAttribute("id", "userTable");
-    columnMid.appendChild(table);
+    table.setAttribute("margin-left", "auto");
+    table.setAttribute("margin-right", "auto");
+    document.body.appendChild(table);
 
-    var row = document.createElement("TR");
+    /*var row = document.createElement("TR");
     row.setAttribute("id", "userTR");
-    document.getElementById("userTable").appendChild(row);
+    document.getElementById("userTable").appendChild(row);*/
 
-    var columnRight = document.createElement("div");
+    /*var columnRight = document.createElement("div");
     columnRight.className = "column side";
-    document.body.appendChild(columnRight);
+    document.body.appendChild(columnRight);*/
+
+
 
 /* ---Cell Number Generator--- */
 
 function cellNum(cellX, cellY){ 
     return ((cellX*colRequest)+(cellY+1));
 }
+
+
 
 /* ---logic loop--- */
 //loops through the immediate surrounding squares (will be used to fill in quantity of bombs)
@@ -268,8 +276,10 @@ function cellNum(cellX, cellY){
             };
 
             document.getElementById(cellCount).onmousedown = function(e) {   //inserts a click function in each cell
-                if(bombClick == 0){
-                    cellClick(e, this);
+                if(bombClick == 0){                                     //if no bombs have been left clicked
+                    if(this.innerHTML == " " || e.button == 2){             //either the cell has to be blank or right clicked
+                        cellClick(e, this);
+                    }
                 }
             };
         }   
@@ -358,26 +368,25 @@ window.oncontextmenu = (e) =>{          //removes right click context menu
 
         queue.push(cellLoc);
 
-        if (e.button == 2){             //right click event will place an "X" over a square
+        if (e.button == 2){             //right click event will place an "check" (Google Icon) over a square
             var iconFlag = document.createElement("i");
             iconFlag.className = "material-icons";
             var iconText = document.createTextNode('check');
-            //
+            iconFlag.appendChild(iconText);
             
-            if (chosen.appendChild(iconFlag) != iconFlag) {
-                
-                if(chosen.value >= 0) {
-                    iconFlag.appendChild(iconText);
+            if (chosen.value >= 0 || chosen.value == "B") {
+                if(chosen.innerHTML == " ") {
+                    chosen.appendChild(iconFlag);
                 }
-                else if(chosen.value =="B") {
-
+                else {
+                    chosen.innerHTML = " ";
                 }
-                //need some kind of indicator so that this cell cannot be left clicked --> chosen.value = -1
             }
+                //need some kind of indicator so that this cell cannot be left clicked --> chosen.value = -1
+        }
             /*else if (chosen.appendChild(iconFlag) == iconFlag) {
                 chosen.removeChild(iconFlag);
             }*/
-        }
         else {
             while (queue.length > 0){ 
 

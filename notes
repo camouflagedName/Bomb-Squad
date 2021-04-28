@@ -1,0 +1,16 @@
+if the cell is right clicked
+    if the cell is not visible
+        if the cell innerHTML is check
+            innerHTML is " "
+        else
+            innerHTML is check
+
+When the cell is left clicked
+    if innerHTML is check
+        do nothing
+    if innerHTML is not checked
+        do stuff
+        when setting off adjacent cells
+            remove check mark
+        when bomb is clicked
+            any cells with checkmark will ???
