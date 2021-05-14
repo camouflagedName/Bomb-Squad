@@ -11,18 +11,27 @@
     <div>
         <span id="row">Number of rows: </span><input type="text" id="rowBox"><br><br>
         <span id="col">Number of columns: </span><input type="text" id="colBox"><br><br>
+        <hr>
+        <span id="difficulty">Select your difficulty level:</span> <br>
 
-        <span>Select your difficulty level:</span> <br>
-            <input type="radio" id="super easy" name="level" value="super easy">
-            <label for="easy">Super Easy</label>       
-            <input type="radio" id="easy" name="level" value="easy">
-            <label for="easy">Nightmare</label>
-            <input type="radio" id="medium" name="level" value="medium">
-            <label for="medium">Ultra Nightmare</label>
-            <input type="radio" id="hard" name="level" value="hard">
-            <label for="hard">Don't Bother</label><br><br>  
-            
-        <button type="button" onclick="genTable()">Start</button> <br><br>
+            <div class="selector">
+                <input type="radio" id="super easy" name="level" value="super easy">
+                <label for="easy">Super Easy</label>
+            </div>
+            <div class="selector">         
+                <input type="radio" id="easy" name="level" value="easy">
+                <label for="easy">Nightmare</label>
+            </div>
+            <div class="selector">
+                <input type="radio" id="medium" name="level" value="medium">
+                <label for="medium">Ultra Nightmare</label>
+            </div>
+            <div class="selector">
+                <input type="radio" id="hard" name="level" value="hard">
+                <label for="hard">Don't Bother</label><br><br>  
+            </div>
+
+        <button class="button" type="button" onclick="genTable()">Start</button> <br><br>
    </div>
    
 

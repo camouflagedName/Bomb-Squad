@@ -40,6 +40,7 @@ function pictureGen(chosenX) {
 
     var resetButton = document.createElement("button");
         resetButton.id = "resetButton";
+        resetButton.className = "button";
         resetButton.type = "button";
         resetButton.innerHTML = "Reset";
 
@@ -49,6 +50,7 @@ function pictureGen(chosenX) {
 
     var newGame = document.createElement("button");
         newGame.id = "newGame";
+        newGame.className = "button";
         newGame.type = "button";
         newGame.innerHTML = "New Game";
 
@@ -134,25 +136,26 @@ function genTable() {
 /* ---table element creator and containers--- */
     
     /*var columnLeft = document.createElement("div");
-    columnLeft.className = "column side";
+    columnLeft.className = "column";
     document.body.appendChild(columnLeft);*/
 
-   /*var columnMid = document.createElement("div");
-    columnMid.className = "column middle";
-    document.body.appendChild(columnMid);*/
+    var columnMid = document.createElement("div");
+    columnMid.className = "column";
+    columnMid.setAttribute("margin", "auto");
+    document.body.appendChild(columnMid);
 
     var table = document.createElement("TABLE");
     table.setAttribute("id", "userTable");
-    table.setAttribute("margin-left", "auto");
-    table.setAttribute("margin-right", "auto");
-    document.body.appendChild(table);
+    table.setAttribute("margin", "auto");
+
+    columnMid.appendChild(table);
 
     /*var row = document.createElement("TR");
     row.setAttribute("id", "userTR");
     document.getElementById("userTable").appendChild(row);*/
 
     /*var columnRight = document.createElement("div");
-    columnRight.className = "column side";
+    columnRight.className = "column";
     document.body.appendChild(columnRight);*/
 
 
@@ -284,59 +287,44 @@ function cellNum(cellX, cellY){
             };
         }   
     }
-
-/* --- reset button action ---*/
-
-    document.body.appendChild(resetButton);
+/* --- button creation in following 2 sections--- */
     
-    var remB = document.getElementById("resetButton");
-    var remT = document.getElementById("userTable");
+var remT = document.getElementById("userTable");
+
+    /* --- reset button action ---*/
+
+    
+        columnMid.appendChild(resetButton);
+        var remB = document.getElementById("resetButton");
+    
+        remB.onclick = function(){
+
+            remT.parentNode.removeChild(remT);
+            bombClick = 0;
+            bombArray.splice(0, bombArray.length);
+            genTable();
+            clickCount = 1;
+        }
+        
+    /* --- New Game button action ---*/
+
+    columnMid.appendChild(newGame);
     var newB = document.getElementById("newGame");
-    
-    remB.onclick = function(){
-        remB.parentNode.removeChild(remB);
+
+    newB.onclick = function(){
         newB.parentNode.removeChild(newB);
         remT.parentNode.removeChild(remT);
+        columnMid.parentNode.removeChild(columnMid);
         bombClick = 0;
         bombArray.splice(0, bombArray.length);
-        genTable();
-        document.body.appendChild(resetButton);
-        document.body.appendChild(newGame);
+        window.location.replace("start.html");
         clickCount = 1;
     }
-    
-/* --- New Game button action ---*/
-
-document.body.appendChild(newGame);
-    
-var remB = document.getElementById("resetButton");
-var remT = document.getElementById("userTable");
-var newB = document.getElementById("newGame");
-
-newB.onclick = function(){
-    newB.parentNode.removeChild(newB);
-    remT.parentNode.removeChild(remT);
-    bombClick = 0;
-    bombArray.splice(0, bombArray.length);
-    window.location.replace("start.html");
-    clickCount = 1;
-}
 
 
 /* ---Other Mouse Events--- */
-window.oncontextmenu = (e) =>{          //removes right click context menu
-    e.preventDefault();
-}
 
-//document.onmousedown = flag;
-
-
-/*function flag(e, flagCount){
-    var flagCell = flagCount.getAttribute("id");
-    if(e.button == 2){
-        flagCount.innerHTML = "X"
-    }       
-}*/
+window.oncontextmenu = (e) =>{ e.preventDefault(); }        //removes right click context menu
 
 
 
@@ -346,8 +334,6 @@ window.oncontextmenu = (e) =>{          //removes right click context menu
         var cellLoc = chosen.getAttribute("id"),   //cell#   
             queue = [],
             visited = [],
-            sum = 0,
-            flagCount = 0;  
             arrCount = new Array(rowRequest);
 
         for(iArr=0; iArr<rowRequest; iArr++){  //creates a 2D counter to match the gameboard
@@ -368,7 +354,7 @@ window.oncontextmenu = (e) =>{          //removes right click context menu
 
         queue.push(cellLoc);
 
-        if (e.button == 2){             //right click event will place an "check" (Google Icon) over a square
+        if (e.button == 2){             //right click event will place a "check" (Google Icon) over a square
             var iconFlag = document.createElement("i");
             iconFlag.className = "material-icons";
             var iconText = document.createTextNode('check');
@@ -469,99 +455,3 @@ window.oncontextmenu = (e) =>{          //removes right click context menu
     }
 }      
 
-//add cell's location to queue
-        /*function addNeighbor(vert, horiz) {  
-            let cN = cellNum(vert, horiz);
-            let neighborID = cN.thisC;
-            //let thisC = document.getElementById(cN);
-            return neighborID;
-        }*/
-//this function uses array coordinates to identify the current cell
-        /*function cellNum(thisX, thisY) {
-            cellLoc = thisX*colRequest + (thisY+1);
-            let thisC = document.getElementById(cellLoc);
-            return {
-                thisC,
-                cellLoc
-            }
-        }*/
- 
-  /*      
-        function boardArray(xCoord, yCoord){ 
-            
-            var vertCh,
-            horizCh,
-            totalCount = 0,
-            savedCount = 0;
-
-            for(var fCount=0; queue.length>=1; fCount++){
-
-                var addCount = 0;
-                queue.shift();
-                for(vertCh = fCount; vertCh >= (-1*fCount); vertCh--){          //this will loop through the x (up/down) coordinates
-		            for(horizCh = fCount; horizCh >= (-1*fCount); horizCh-- ){
-		                
-		                if (Math.abs(vertCh)+Math.abs(horizCh) == fCount) {
-                            
-                            let bArrayX = xCoord + vertCh;          //original coord + increase
-                            let bArrayY = yCoord + horizCh;
-                            if (bArrayX >= 0 && bArrayX < rowRequest && bArrayY >= 0 && bArrayY < colRequest){  //within gameboard boundaries
-                                if(tableArray[bArrayX][bArrayY] == 0) { 
-                                    //alert(vertCh + "  " + horizCh + "  " + tableArray[bArrayX][bArrayY]);                                    
-
-                                    
-                                    if(fCount == 0){
-                                        arrCount[xCoord][yCoord] = 0;
-                                        //clearCell(bArrayX, bArrayY, tableArray[bArrayX][bArrayY]);
-                                        addCount++;
-                                    }
-                                    else {
-                                        if(bArrayX < (rowRequest-1)){
-                                            if(arrCount[(bArrayX+1)][bArrayY]==0){
-                                                clearCell(bArrayX, bArrayY, tableArray[bArrayX][bArrayY]);
-                                                arrCount[bArrayX][bArrayY] = 0;
-                                                addCount++;    
-                                            }
-                                        }
-                                        if(bArrayX > 0){
-                                            if(arrCount[(bArrayX-1)][bArrayY]==0){
-                                                clearCell(bArrayX, bArrayY, tableArray[bArrayX][bArrayY]);
-                                                arrCount[bArrayX][bArrayY] = 0;
-                                                addCount++;    
-                                            }
-                                        }
-                                        if(bArrayY < (colRequest-1)){
-                                            if(arrCount[(bArrayX)][(bArrayY+1)]==0){
-                                                clearCell(bArrayX, bArrayY, tableArray[bArrayX][bArrayY]);
-                                                arrCount[bArrayX][bArrayY] = 0;
-                                                addCount++;    
-                                            }
-                                        }
-                                        if(bArrayY > 0){
-                                            if(arrCount[(bArrayX)][(bArrayY-1)]==0){
-                                                clearCell(bArrayX, bArrayY, tableArray[bArrayX][bArrayY]);
-                                                arrCount[bArrayX][bArrayY] = 0;
-                                                addCount++;    
-                                            }
-                                        }
-                                    }
-		                            totalCount = savedCount+addCount;
-                                }
-		                        //else  --> if it is not empty, remove something from the loop
-                            }
-		                }
-		            }
-	            }  
-	            if (addCount > 0){  //basically, if at least one square was found to be empty, continue looping
-	                //alert("hello");
-	                queue.push(fCount);
-	                savedCount = totalCount;
-	            }
-	            else{
-	                return;
-	            }
-	            //console.log(queue + "  " + addCount);
-            }
-        }
-    }
-}*/
