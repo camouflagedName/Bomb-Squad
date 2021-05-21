@@ -388,7 +388,7 @@ window.oncontextmenu = (e) =>{ e.preventDefault(); }        //removes right clic
                 if(chosen.value == "B") {
                     bombClick = 1;          //board cannot be interacted with anymore
                     pictureGen(chosen);
-                    chosen.style.backgroundColor = "red";
+                    chosen.style.backgroundColor = "white";
                     
                     for(let i = 0; bombArray.length > 0; i++) {             //displays all bombs
                         cellLoc = bombArray.shift();
