@@ -394,7 +394,7 @@ window.oncontextmenu = (e) =>{ e.preventDefault(); }        //removes right clic
                         cellLoc = bombArray.shift();
                         chosen = document.getElementById(cellLoc);
                         pictureGen(chosen);
-                        chosen.style.backgroundColor = "red";
+                        chosen.style.backgroundColor = "white";
                         }
                     //GAME OVER indicator
                 }
