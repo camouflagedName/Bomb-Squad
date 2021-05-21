@@ -19,7 +19,7 @@ table{
 }
 
 td {
-    background-color: #ff124f
+   background-color: #ff124f
 
 }
 
@@ -54,7 +54,7 @@ input{
 }
 
 .material-icons{
-    color: red;
+    color: black;
 }
 
 .header{
@@ -95,7 +95,7 @@ input{
 }
 
 .selector:hover{
-    background-color: #D3D3D3;
+    background-color: #ff124f;
     font-size: 1.2em;
 }
 

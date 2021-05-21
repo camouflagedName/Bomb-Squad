@@ -69,7 +69,7 @@ for(iArr=0; iArr<rowRequest; iArr++){  //creates a 2D array the size of the play
     
 /* --- check to make sure all options are selected --- */
 
-    var superEasy = document.getElementById("super easy").checked;
+    var superEasy = document.getElementById("superEasy").checked;
     var easy = document.getElementById("easy").checked;
     var medium = document.getElementById("medium").checked;
     var hard = document.getElementById("hard").checked;

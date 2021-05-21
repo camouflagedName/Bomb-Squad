@@ -81,7 +81,7 @@ function genTable() {
     
 /* --- check to make sure all options are selected --- */
 
-    var superEasy = document.getElementById("super easy").checked;
+    var superEasy = document.getElementById("superEasy").checked;
     var easy = document.getElementById("easy").checked;
     var medium = document.getElementById("medium").checked;
     var hard = document.getElementById("hard").checked;
@@ -368,12 +368,10 @@ window.oncontextmenu = (e) =>{ e.preventDefault(); }        //removes right clic
                     chosen.innerHTML = " ";
                 }
             }
-                //need some kind of indicator so that this cell cannot be left clicked --> chosen.value = -1
         }
-            /*else if (chosen.appendChild(iconFlag) == iconFlag) {
-                chosen.removeChild(iconFlag);
-            }*/
+
         else {
+            //this loop will iterate through 
             while (queue.length > 0){ 
 
                 cellLoc = queue.shift();                        //remove first from array and put it in cellLoc
@@ -385,22 +383,20 @@ window.oncontextmenu = (e) =>{ e.preventDefault(); }        //removes right clic
                     left = startY-1,            
                     right = startY+1,
                     up = startX-1,
-                    down = startX+1;
-                    //create a diagonal???               
+                    down = startX+1;             
         
                 if(chosen.value == "B") {
-                    bombClick = 1;
+                    bombClick = 1;          //board cannot be interacted with anymore
                     pictureGen(chosen);
-                    chosen.style.backgroundColor = "white";
+                    chosen.style.backgroundColor = "red";
                     
-                    for(let i = 0; bombArray.length > 0; i++) {
+                    for(let i = 0; bombArray.length > 0; i++) {             //displays all bombs
                         cellLoc = bombArray.shift();
                         chosen = document.getElementById(cellLoc);
                         pictureGen(chosen);
-                        chosen.style.backgroundColor = "white";
-                        //alert("First  " + bombArray.length);
+                        chosen.style.backgroundColor = "red";
                         }
-                    //GAME OVER
+                    //GAME OVER indicator
                 }
 
                 else if(chosen.value > 0) {  
@@ -409,12 +405,12 @@ window.oncontextmenu = (e) =>{ e.preventDefault(); }        //removes right clic
                     chosen.value = -1;
                 }
                 
-                else if(chosen.value == 0) { //this will set off any other blocks that are 0
+                else if(chosen.value == 0) { //reveals the current cell if it is empty and then iterates through the surrouding cells
                     chosen.style.backgroundColor = "white";
                     chosen.innerHTML = " ";
-                    chosen.value = -1;              //is this sloppy? change the value to a negative so that right click event wont create "flag"
+                    chosen.value = -1;              //change the value to a negative so that right click event wont create "flag"
 
-                    //the value of the neighboring cells are added into the "queue" array
+                    //the value of the neighboring cells are added into the "queue" array to be "inspected" by the loop during future iterations
                     if (up >= 0) { 
                         cellLoc = cellNum(up, startY);              
                         queue.push(cellLoc);
@@ -431,7 +427,7 @@ window.oncontextmenu = (e) =>{ e.preventDefault(); }        //removes right clic
                         cellLoc = cellNum(startX, right);
                         queue.push(cellLoc);
                     }    
-
+//need to add in diagonal cells
 
                     /*for(let i = 0; i < queue.length; i++) {
                         console.log(sum + " " + "Entry# " + i + " in Queue: " + queue[i]);
